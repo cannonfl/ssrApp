@@ -10,7 +10,24 @@ const config = {
     path: path.resolve(__dirname, 'build')
   },
   devServer: {
-    contentBase: path.join(__dirname, "public")
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true,
+    proxy: { 
+      '/**': {  //catch all requests
+        target: "./src/server/index.html",  //default target
+        secure: false,
+        bypass: function(req, res, opt){
+          //your custom code to check for any exceptions
+          //console.log('bypass check', {req: req, res:res, opt: opt});
+          if(req.path.indexOf('/img/') !== -1 || req.path.indexOf('/css/') !== -1){
+            return req.path;
+          }
+          if (req.headers.accept.indexOf('html') !== -1) {
+            return '/index.html';
+          }
+        }
+      }
+    }
   },
   module: {
     rules: [
