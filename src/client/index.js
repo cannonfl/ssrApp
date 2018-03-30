@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app";
+import {BrowserRouter as Router} from "react-router-dom";
+import Routes from "./routes";
 
-ReactDOM.render(
-  <App />, 
+ReactDOM.hydrate(
+  <Router>
+    <Routes />
+  </Router>, 
   document.getElementById("app")
 );
