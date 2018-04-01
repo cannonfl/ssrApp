@@ -3,14 +3,13 @@ const express = require('express');
 const renderer = require('../helpers/renderer').default;
 
 const app = new express();
-const port = process.env.PORT || 8080;
-
 app.use(express.static('public'));
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.send(renderer(req));
 })
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

@@ -7,7 +7,8 @@ const config = {
   entry: './src/client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    publicPath: 'http://localhost:8080/'
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
@@ -16,6 +17,7 @@ const config = {
       '/**': {  //catch all requests
         target: "./src/server/index.html",  //default target
         secure: false,
+        ignorePath: true,
         bypass: function(req, res, opt){
           //your custom code to check for any exceptions
           //console.log('bypass check', {req: req, res:res, opt: opt});
@@ -23,7 +25,7 @@ const config = {
             return req.path;
           }
           if (req.headers.accept.indexOf('html') !== -1) {
-            return '/index.html';
+            return req.path;
           }
         }
       }
