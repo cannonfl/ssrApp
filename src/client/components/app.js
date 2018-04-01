@@ -7,6 +7,7 @@ class Home extends Component {
     return (
       <div>
         <p>I'm the App Component</p>
+        <a href="http://localhost:5150/auth/google">Sign In With Google</a>
       </div>
     );
   };
