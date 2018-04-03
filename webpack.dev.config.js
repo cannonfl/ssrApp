@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config.js');
 
 const config = {
-  entry: './src/client/index.js',
+  entry: ["babel-polyfill", "./src/client/index.js"],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
@@ -21,7 +21,7 @@ const config = {
         bypass: function(req, res, opt){
           //your custom code to check for any exceptions
           //console.log('bypass check', {req: req, res:res, opt: opt});
-          if(req.path.indexOf('/img/') !== -1 || req.path.indexOf('/css/') !== -1){
+          if(req.path.indexOf('/img/') !== -1 || req.path.indexOf('/css/') !== -1 || req.path.indexOf('.ico') !== -1){
             return req.path;
           }
           if (req.headers.accept.indexOf('html') !== -1) {
